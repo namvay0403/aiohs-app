@@ -61,6 +61,10 @@ class WorkerRegisterController {
       );
       if (response.data['code'] == 0) {
         return 1;
+      } else if (response.data['code'] != 0 &&
+          response.data['message'] ==
+              'Chúng tôi phát hiện bạn đã vi phạm điều lệ trước đó. Vui lòng liên hệ đội ngũ để được hỗ trợ!') {
+        throw response.data['message'];
       } else {
         try {
           var response2 = await dio.put(
